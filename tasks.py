@@ -84,6 +84,14 @@ def logs(context, service="", follow=False, tail=None):
 
 @task
 def debug(context):
+    """Run containers in debug mode.
+
+    Args:
+        context ([invoke.task]): Invoke task object.
+
+    Returns:
+        (obj): Contains Invoke result from running task.
+    """
     print("Starting PowerDNSAPI in debug mode...")
     return context.run("docker-compose up", env=_DOCKER_COMPOSE_ENV, pty=True)
 
@@ -123,7 +131,6 @@ def build(context, nocache=False, service=_DEFAULT_SERVICE):
         nocache (bool): Do not use cache when building the image
         service (str): Service to build
     """
-
     command = [
         "docker-compose build",
         "--progress=plain",
@@ -143,6 +150,7 @@ def clean(context, remove=True):
 
     Args:
         context (obj): Used to run specific commands
+        remove (bool): Set to remove image
     """
     print("Attempting to remove all docker-compose resources")
     down(context, remove)
@@ -253,6 +261,17 @@ def cli(context):
         context (obj): Used to run specific commands
     """
     run_cmd(context, "bash", False)
+
+
+@task
+def ipython(context, local=INVOKE_LOCAL):
+    """Enter the iPython environment.
+
+    Args:
+        context (obj): Used to run specific commands
+        local (bool): Define as `True` to execute locally
+    """
+    run_cmd(context, "ipython", local)
 
 
 @task

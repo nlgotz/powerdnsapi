@@ -51,6 +51,7 @@ exclude = [
     "migrations",
     "tests",
     "development",
+    "tasks.py",
 ]
 
 # Same as Black.
