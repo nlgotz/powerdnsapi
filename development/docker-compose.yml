@@ -1,0 +1,18 @@
+---
+version: "3"
+
+x-common: &common
+  image: "${IMAGE_NAME}:${IMAGE_VER}"
+  volumes:
+    - "${PWD}:/source"
+
+services:
+  powerdnsapi-dev:
+    <<: *common
+    build:
+      context: "${PWD}"
+      dockerfile: "development/Dockerfile"
+      args:
+        PYTHON_VER: "${PYTHON_VER}"
+
+# TODO: Add PowerDNS Server

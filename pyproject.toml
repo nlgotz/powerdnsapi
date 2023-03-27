@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "powerdnsapi"
+version = "0.0.1"
+description = "Python PowerDNS API tool for interacting with Authoritative PowerDNS Servers"
+authors = ["Nate Gotz <775979+nlgotz@users.noreply.github.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+homepage = "https://github.com/nlgotz/powerdnsapi"
+repository = "https://github.com/nlgotz/powerdnsapi"
+include = [
+    "LICENSE",
+    "README.md",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+jsonschema = "*"
+jsonref = "*"
+
+[tool.poetry.group.dev.dependencies]
+bandit = "*"
+black = "*"
+coverage = "*"
+invoke = "*"
+ipython = "*"
+Markdown = "*"
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocstrings = "*"
+mkdocstrings-python = "*"
+mypy = "*"
+pytest = "*"
+ruff = "*"
+toml = "*"
+yamllint = "*"
+types-requests = "*"
+types-jsonschema = "*"
+types-setuptools = "*"
+types-toml = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+# pyflakes, pycodestyle, isort, pydocstyle, pep8-naming, pylint, flake8-bugbear
+select = ["F", "E", "W", "I", "D", "N", "PL", "B"]
+ignore = ["D203", "D212", "D107"]
+
+exclude = [
+    "migrations",
+    "tests",
+    "development",
+]
+
+# Same as Black.
+line-length = 120
+
+# Assume Python 3.7.
+target-version = "py37"
+
+[tool.ruff.pydocstyle]
+convention = "google"
