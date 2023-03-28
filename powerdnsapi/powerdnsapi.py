@@ -1,7 +1,7 @@
 """PowerDNS API Data retrieval."""
 import json
 from http import HTTPStatus
-from typing import Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 import jsonref  # type: ignore
 import requests
@@ -355,3 +355,28 @@ class PowerDNSAPI:
             if change_rrset.status_code == HTTPStatus.NO_CONTENT:
                 successfully_updated = True
         return successfully_updated
+
+    def create_rrset(self, records: List[dict]) -> Tuple[bool, List[dict]]:
+        """Simple Way to create a usable RRSET.
+
+        Args:
+            records (List[dict]): A list of dictionaries containing name, type, content and optionally ttl.
+
+        Returns:
+            Tuple[bool, List[dict]]: Boolean of if records contained all needed keys,
+            List of RRSET object and an error message.
+        """
+        status = False
+        if isinstance(records, list) and all(
+            all(key in record for key in ["name", "type", "content"])
+            for record in records
+        ):
+            for record in records:
+                record["ttl"] = record.get("ttl", 3600)
+                record["changetype"] = "REPLACE"
+                record["records"] = [
+                    {"content": record.get("content"), "disabled": False}
+                ]
+                record.pop("content")
+            status = True
+        return status, records

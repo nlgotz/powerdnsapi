@@ -37,6 +37,7 @@ types-requests = "*"
 types-jsonschema = "*"
 types-setuptools = "*"
 types-toml = "*"
+types-invoke = "*"
 
 [build-system]
 requires = ["poetry-core"]
