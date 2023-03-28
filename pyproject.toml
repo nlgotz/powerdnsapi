@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "powerdnsapi"
-version = "0.0.1"
+version = "0.0.2"
 description = "Python PowerDNS API tool for interacting with Authoritative PowerDNS Servers"
 authors = ["Nate Gotz <775979+nlgotz@users.noreply.github.com>"]
 license = "Apache 2.0"
